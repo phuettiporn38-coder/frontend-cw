@@ -1,4 +1,4 @@
-image: node:20
+image: node:18
 
 stages:
   - build
@@ -37,4 +37,5 @@ sonarqube_scan:
 deploy_job:
   stage: deploy
   script:
-    - echo "Deploy step finished"
+    - echo "Deploying project..."
+    - echo "Deploy success"
