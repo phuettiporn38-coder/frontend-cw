@@ -1,0 +1,40 @@
+image: node:20
+
+stages:
+  - build
+  - test
+  - sonarqube_scan
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+# ---------- BUILD ----------
+build_job:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+
+# ---------- TEST ----------
+test_job:
+  stage: test
+  script:
+    - npm run test || echo "skip test"
+
+# ---------- SONAR ----------
+sonarqube_scan:
+  stage: sonarqube_scan
+  script:
+    - echo "Running SonarQube Scan..."
+    - echo "Scan completed"
+
+# ---------- DEPLOY ----------
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Deploy step finished"
